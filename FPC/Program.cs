@@ -1,12 +1,13 @@
+using CommonLibraryP.LogPKG;
+using CommonLibraryP.MachinePKG;
 using FPC.Components;
 using FPC.Data;
 using FPC.Services;
+using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using CommonLibraryP.LogPKG;
-using CommonLibraryP.MachinePKG; // 新增此 using
 
 var webApOpts = new WebApplicationOptions
 {
@@ -36,15 +37,13 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Web API", Version = "V1" });
 });
 
-// 註冊 SerilogService (新增此行)
-builder.Services.AddSingleton<SerilogService>(sp => 
-    new SerilogService(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.AddSingleton<UIService>();
+builder.Services.AddHttpClient();
 builder.AddMachineService();
 
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<DxThemesService>();
+
 builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
 
@@ -52,6 +51,11 @@ builder.Services.AddDbContextFactory<DSDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddSingleton<SerilogService>(sp =>
+    new SerilogService(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSingleton<CircuitHandler, CustomCircuitHandler>();
 
 var app = builder.Build();
 
@@ -61,10 +65,20 @@ if (!app.Environment.IsDevelopment()) {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API");
+});
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseRouting();
 app.UseAntiforgery();
+
+app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()

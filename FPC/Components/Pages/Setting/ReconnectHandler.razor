@@ -1,0 +1,36 @@
+﻿@namespace FPC
+@inject IJSRuntime JS
+
+@if (!_initialized)
+{
+    <script>
+        new MutationObserver((mutations, observer) => {
+            if (document.querySelector('#components-reconnect-modal h5 a')) {
+                async function attemptReload() {
+                    try {
+                        await fetch('');
+                        @* location.reload(); *@
+                        window.location.href = '/';
+                    } catch (e) {
+                        @* console.log('Server still unavailable...'); *@
+                    }
+                }
+                observer.disconnect();
+                attemptReload();
+                setInterval(attemptReload, 10000);
+            }
+        }).observe(document.body, { childList: true, subtree: true });
+    </script>
+}
+
+@code {
+    private bool _initialized = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _initialized = true;
+        }
+    }
+}
