@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.37203.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPC", "FPC\FPC.csproj", "{ACEFA677-10E5-4CFC-80F9-B5C16398DA6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibraryP", "..\CommonLibraryP\CommonLibraryP\CommonLibraryP.csproj", "{23A7D710-E91C-7E2E-49C9-F4A0BB0B0D6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{ACEFA677-10E5-4CFC-80F9-B5C16398DA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACEFA677-10E5-4CFC-80F9-B5C16398DA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACEFA677-10E5-4CFC-80F9-B5C16398DA6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A7D710-E91C-7E2E-49C9-F4A0BB0B0D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A7D710-E91C-7E2E-49C9-F4A0BB0B0D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A7D710-E91C-7E2E-49C9-F4A0BB0B0D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A7D710-E91C-7E2E-49C9-F4A0BB0B0D6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEE75F88-F52A-48DB-9F8C-5EB1181FCFD3}
 	EndGlobalSection
 EndGlobal
