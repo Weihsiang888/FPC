@@ -41,6 +41,9 @@ builder.Services.AddSingleton<UIService>();
 builder.Services.AddHttpClient();
 builder.AddMachineService();
 
+// 註冊 MachineTagService
+builder.Services.AddScoped<MachineTagService>();
+
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<DxThemesService>();
 
