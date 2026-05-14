@@ -10,7 +10,7 @@
     <header class="tm-header @(isScrolled ? "tm-header-scrolled" : "")">
         <div class="tm-header-container">
             <div class="tm-header-logo">
-                <img src="images/logo.svg" alt="Techman Robot" />
+                <span class="tm-brand-text">Techman Robot</span>
             </div>
 
             <nav class="tm-header-nav">
@@ -49,10 +49,10 @@
     <footer class="tm-footer">
         <div class="tm-footer-container">
             <div class="tm-footer-left">
-                <img src="images/logo.svg" alt="Techman Robot" class="tm-footer-logo" />
+                <h4 class="tm-h4 tm-footer-brand">Techman Robot</h4>
                 <div class="tm-footer-info">
-                    <p class="tm-body" style="color: var(--tm-text-light);">© 2024 Techman Robot Inc.</p>
-                    <p class="tm-subtitle" style="color: var(--tm-text-light); margin-top: 8px;">
+                    <p class="tm-subtitle" style="color: var(--tm-text-light);">© 2024 Techman Robot Inc.</p>
+                    <p class="tm-caption" style="color: var(--tm-text-light); margin-top: 4px;">
                         協作機器人領導品牌，打造智慧製造未來
                     </p>
                 </div>
@@ -60,14 +60,7 @@
 
             <div class="tm-footer-right">
                 <div class="tm-footer-section">
-                    <h5 class="tm-h5" style="color: var(--tm-text-light); margin-bottom: var(--tm-spacing-sm);">產品</h5>
-                    <NavLink href="/machine" class="tm-footer-link">機台管理</NavLink>
-                    <NavLink href="/counter" class="tm-footer-link">計數器</NavLink>
-                    <NavLink href="/weather" class="tm-footer-link">天氣</NavLink>
-                </div>
-
-                <div class="tm-footer-section">
-                    <h5 class="tm-h5" style="color: var(--tm-text-light); margin-bottom: var(--tm-spacing-sm);">資源</h5>
+                    <h6 class="tm-h6 tm-footer-section-title">資源</h6>
                     <a href="https://www.tm-robot.com" class="tm-footer-link" target="_blank">官方網站</a>
                     <a href="https://www.tm-robot.com/support" class="tm-footer-link" target="_blank">技術支援</a>
                 </div>

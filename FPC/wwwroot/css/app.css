@@ -130,6 +130,13 @@ h5, .tm-h5 {
     margin: 0;
 }
 
+h6, .tm-h6 {
+    font-size: 14px;
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
 p, .tm-body {
     font-size: var(--tm-font-size-body);
     line-height: var(--tm-line-height-body);
