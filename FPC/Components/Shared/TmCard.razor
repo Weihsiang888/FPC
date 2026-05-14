@@ -1,0 +1,117 @@
+@* Techman Robot 卡片組件 *@
+
+<div class="tm-card @GetCardClass() @CssClass" @onclick="OnClick">
+    @if (!string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(IconClass))
+    {
+        <div class="tm-card-header">
+            @if (!string.IsNullOrEmpty(IconClass))
+            {
+                <span class="tm-card-icon @IconClass"></span>
+            }
+            @if (!string.IsNullOrEmpty(Title))
+            {
+                <h4 class="tm-card-title tm-h5">@Title</h4>
+            }
+            @if (HeaderContent != null)
+            {
+                <div class="tm-card-header-extra">
+                    @HeaderContent
+                </div>
+            }
+        </div>
+    }
+
+    <div class="tm-card-body">
+        @if (!string.IsNullOrEmpty(Description))
+        {
+            <p class="tm-card-description tm-body">@Description</p>
+        }
+        @ChildContent
+    </div>
+
+    @if (FooterContent != null)
+    {
+        <div class="tm-card-footer">
+            @FooterContent
+        </div>
+    }
+</div>
+
+@code {
+    /// <summary>
+    /// 卡片標題
+    /// </summary>
+    [Parameter]
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// 卡片描述
+    /// </summary>
+    [Parameter]
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Icon CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? IconClass { get; set; }
+
+    /// <summary>
+    /// 卡片樣式：Default / Hover (可懸停) / Dark (深色背景)
+    /// </summary>
+    [Parameter]
+    public string CardStyle { get; set; } = "Default";
+
+    /// <summary>
+    /// 是否可點擊
+    /// </summary>
+    [Parameter]
+    public bool Clickable { get; set; }
+
+    /// <summary>
+    /// 自訂 CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? CssClass { get; set; }
+
+    /// <summary>
+    /// 點擊事件
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    /// <summary>
+    /// Header 額外內容
+    /// </summary>
+    [Parameter]
+    public RenderFragment? HeaderContent { get; set; }
+
+    /// <summary>
+    /// 主要內容
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Footer 內容
+    /// </summary>
+    [Parameter]
+    public RenderFragment? FooterContent { get; set; }
+
+    private string GetCardClass()
+    {
+        var classes = new List<string>();
+
+        if (CardStyle.ToLower() == "hover" || Clickable)
+        {
+            classes.Add("tm-card-hover");
+        }
+
+        if (CardStyle.ToLower() == "dark")
+        {
+            classes.Add("tm-card-dark");
+        }
+
+        return string.Join(" ", classes);
+    }
+}

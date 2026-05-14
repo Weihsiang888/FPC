@@ -1,54 +1,87 @@
 ﻿@inherits LayoutComponentBase
 @using FPC.Services
 @inject NavigationManager NavigationManager
-@inject DxThemesService ThemesService
 
 <ReconnectHandler />
 
-<div class="page">
-    <Drawer DrawerHeader="drawerHeader" DrawerFooter="drawerFooter">
-        <DrawerBody>
-            <div class="w-100">
-                <NavMenu></NavMenu>
+<!-- Techman Robot 品牌主佈局 -->
+<div class="tm-layout">
+    <!-- Header Navigation -->
+    <header class="tm-header @(isScrolled ? "tm-header-scrolled" : "")">
+        <div class="tm-header-container">
+            <div class="tm-header-logo">
+                <img src="images/logo.svg" alt="Techman Robot" />
             </div>
-        </DrawerBody>
-        <DrawerTarget>
-            <div class="nav-buttons-container">
-                <NavLink href="@UrlGenerator.GetUrl(new Uri(NavigationManager.Uri).LocalPath, !ToggledSidebar)">
-                    <DxButton RenderStyle="@(ThemesService.IsActiveThemeDark ? ButtonRenderStyle.Light : ButtonRenderStyle.Dark)" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-menu"></DxButton>
+
+            <nav class="tm-header-nav">
+                <NavLink href="/" class="tm-nav-link" Match="NavLinkMatch.All">
+                    <span class="tm-subtitle">首頁</span>
                 </NavLink>
-                @if (new Uri(NavigationManager.Uri).LocalPath != "/") {
-                    <NavLink href="@UrlGenerator.GetUrl("/", ToggledSidebar)" class="button-link hidden">
-                        <DxButton RenderStyle="@(ThemesService.IsActiveThemeDark ? ButtonRenderStyle.Light : ButtonRenderStyle.Dark)" Text="Back to Home" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button-nav" IconCssClass="icon icon-back"></DxButton>
-                    </NavLink>
-                }
+                <NavLink href="/counter" class="tm-nav-link">
+                    <span class="tm-subtitle">計數器</span>
+                </NavLink>
+                <NavLink href="/weather" class="tm-nav-link">
+                    <span class="tm-subtitle">天氣</span>
+                </NavLink>
+                <NavLink href="/machine" class="tm-nav-link">
+                    <span class="tm-subtitle">機台</span>
+                </NavLink>
+            </nav>
+
+            <div class="tm-header-actions">
+                <TmButton ButtonType="Secondary" Text="登入" OnClick="HandleLogin" CssClass="tm-header-login-btn" />
             </div>
-            <div class="p-4">
-                @Body
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="tm-main">
+        <!-- 背景裝飾光斑 -->
+        <div class="tm-slice tm-slice-blue" style="width: 600px; height: 600px; top: 10%; left: -10%;"></div>
+        <div class="tm-slice tm-slice-green" style="width: 500px; height: 500px; top: 50%; right: -5%;"></div>
+
+        <div class="tm-content">
+            @Body
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tm-footer">
+        <div class="tm-footer-container">
+            <div class="tm-footer-left">
+                <img src="images/logo.svg" alt="Techman Robot" class="tm-footer-logo" />
+                <div class="tm-footer-info">
+                    <p class="tm-body" style="color: var(--tm-text-light);">© 2024 Techman Robot Inc.</p>
+                    <p class="tm-subtitle" style="color: var(--tm-text-light); margin-top: 8px;">
+                        協作機器人領導品牌，打造智慧製造未來
+                    </p>
+                </div>
             </div>
-        </DrawerTarget>
-    </Drawer>
+
+            <div class="tm-footer-right">
+                <div class="tm-footer-section">
+                    <h5 class="tm-h5" style="color: var(--tm-text-light); margin-bottom: var(--tm-spacing-sm);">產品</h5>
+                    <NavLink href="/machine" class="tm-footer-link">機台管理</NavLink>
+                    <NavLink href="/counter" class="tm-footer-link">計數器</NavLink>
+                    <NavLink href="/weather" class="tm-footer-link">天氣</NavLink>
+                </div>
+
+                <div class="tm-footer-section">
+                    <h5 class="tm-h5" style="color: var(--tm-text-light); margin-bottom: var(--tm-spacing-sm);">資源</h5>
+                    <a href="https://www.tm-robot.com" class="tm-footer-link" target="_blank">官方網站</a>
+                    <a href="https://www.tm-robot.com/support" class="tm-footer-link" target="_blank">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 
 @code {
-    [SupplyParameterFromQuery(Name = UrlGenerator.ToggleSidebarName)]
-    public bool ToggledSidebar { get; set; }
+    private bool isScrolled = false;
 
-    private RenderFragment drawerHeader => @<div class="navigation-drawer-header">
-        <img class="logo" src="images/logo.svg" alt="DevExpress logo" />
-        <NavLink href="@UrlGenerator.GetUrl(new Uri(NavigationManager.Uri).LocalPath, !ToggledSidebar)">
-            <DxButton RenderStyle="@(ThemesService.IsBootstrapDarkActive ? ButtonRenderStyle.Dark : ButtonRenderStyle.Light)" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button-nav" IconCssClass="@(ToggledSidebar ? "icon icon-close" : "icon icon-menu")"></DxButton>
-        </NavLink>
-    </div>;
-
-    private RenderFragment drawerFooter => @<div>
-        <NavLink href="https://docs.devexpress.com/Blazor/400725/blazor-components" class="button-link">
-            <DxButton Text="Docs" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="footer-button" RenderStyle="ButtonRenderStyle.Light" IconCssClass="icon docs-icon"></DxButton>
-        </NavLink>
-        <NavLink href="https://demos.devexpress.com/blazor/" class="button-link">
-            <DxButton Text="Demos" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="footer-button" RenderStyle="ButtonRenderStyle.Light" IconCssClass="icon demos-icon"></DxButton>
-        </NavLink>
-    </div>;
-
- 
+    private void HandleLogin()
+    {
+        // 登入邏輯待實作
+        NavigationManager.NavigateTo("/login");
+    }
 }

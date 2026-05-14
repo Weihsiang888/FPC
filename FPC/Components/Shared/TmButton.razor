@@ -1,0 +1,92 @@
+@* Techman Robot 按鈕組件 *@
+
+<button class="tm-button @GetButtonClass() @CssClass"
+        disabled="@(!IsEnabled)"
+        type="@ButtonHtmlType"
+        @onclick="OnClick">
+    @if (!string.IsNullOrEmpty(IconClass))
+    {
+        <span class="tm-button-icon @IconClass"></span>
+    }
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        <span class="tm-button-text">@Text</span>
+    }
+    @ChildContent
+</button>
+
+@code {
+    /// <summary>
+    /// 按鈕類型：Primary (主要) / Secondary (次要)
+    /// </summary>
+    [Parameter]
+    public string ButtonType { get; set; } = "Primary";
+
+    /// <summary>
+    /// 按鈕尺寸：Default (40px) / Large (52px)
+    /// </summary>
+    [Parameter]
+    public string Size { get; set; } = "Default";
+
+    /// <summary>
+    /// 按鈕文字
+    /// </summary>
+    [Parameter]
+    public string? Text { get; set; }
+
+    /// <summary>
+    /// Icon CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? IconClass { get; set; }
+
+    /// <summary>
+    /// 是否啟用
+    /// </summary>
+    [Parameter]
+    public bool IsEnabled { get; set; } = true;
+
+    /// <summary>
+    /// 自訂 CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? CssClass { get; set; }
+
+    /// <summary>
+    /// HTML Button Type (button/submit/reset)
+    /// </summary>
+    [Parameter]
+    public string ButtonHtmlType { get; set; } = "button";
+
+    /// <summary>
+    /// 點擊事件
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    /// <summary>
+    /// 子內容
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private string GetButtonClass()
+    {
+        var classes = new List<string>();
+
+        // 類型樣式
+        classes.Add(ButtonType.ToLower() switch
+        {
+            "secondary" => "tm-button-secondary",
+            _ => "tm-button-primary"
+        });
+
+        // 尺寸樣式
+        if (Size.ToLower() == "large")
+        {
+            classes.Add("tm-button-large");
+        }
+
+        return string.Join(" ", classes);
+    }
+}

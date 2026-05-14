@@ -5,24 +5,69 @@
 @rendermode InteractiveServer
 @inject WeatherForecastService ForecastService
 
-<PageTitle>Weather</PageTitle>
-<h1>Weather</h1>
+<PageTitle>天氣預報 - Techman Robot</PageTitle>
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <DxGrid Data="@forecasts">
-        <Columns>
-            <DxGridDataColumn Caption="Date" FieldName="Date" />
-            <DxGridDataColumn Caption="Temperature (C)" FieldName="TemperatureC" />
-            <DxGridDataColumn Caption="Temperature (F)" FieldName="TemperatureF" />
-            <DxGridDataColumn Caption="Summary" FieldName="Summary" />
-        </Columns>
-    </DxGrid>
-}
+<div class="weather-container">
+    <div class="weather-header">
+        <h1 class="tm-h1">天氣監控</h1>
+        <p class="tm-body" style="color: var(--tm-text-secondary); margin-top: var(--tm-spacing-xs);">
+            工廠環境溫濕度監控，確保最佳生產條件
+        </p>
+    </div>
+
+    @if (forecasts == null)
+    {
+        <TmCard Title="載入中">
+            <div class="weather-loading">
+                <p class="tm-body">正在載入天氣數據...</p>
+            </div>
+        </TmCard>
+    }
+    else
+    {
+        <div class="weather-grid">
+            @foreach (var forecast in forecasts)
+            {
+                <TmCard CardStyle="Hover">
+                    <div class="weather-card-content">
+                        <div class="weather-date">
+                            <span class="tm-h4">@forecast.Date.ToString("MM/dd")</span>
+                            <span class="tm-subtitle" style="color: var(--tm-text-secondary);">
+                                @forecast.Date.ToString("dddd")
+                            </span>
+                        </div>
+
+                        <div class="weather-temp">
+                            <span class="temp-celsius tm-h2">@forecast.TemperatureC°</span>
+                            <span class="temp-fahrenheit tm-subtitle" style="color: var(--tm-text-secondary);">
+                                (@forecast.TemperatureF°F)
+                            </span>
+                        </div>
+
+                        <div class="weather-summary">
+                            <span class="tm-body" style="color: var(--tm-primary); font-weight: var(--tm-font-weight-medium);">
+                                @forecast.Summary
+                            </span>
+                        </div>
+                    </div>
+                </TmCard>
+            }
+        </div>
+
+        <div class="weather-table-section">
+            <TmCard Title="詳細數據表">
+                <DxGrid Data="@forecasts" CssClass="weather-table">
+                    <Columns>
+                        <DxGridDataColumn Caption="日期" FieldName="Date" />
+                        <DxGridDataColumn Caption="溫度 (°C)" FieldName="TemperatureC" />
+                        <DxGridDataColumn Caption="溫度 (°F)" FieldName="TemperatureF" />
+                        <DxGridDataColumn Caption="天氣概況" FieldName="Summary" />
+                    </Columns>
+                </DxGrid>
+            </TmCard>
+        </div>
+    }
+</div>
 
 @code {
     private WeatherForecast[]? forecasts;

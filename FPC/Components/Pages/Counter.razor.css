@@ -1,37 +1,83 @@
-﻿.counter-block {
-    display: flex;
-    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-    flex-direction: column;
-    border-radius: 1rem;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: center;
-    width: 16.875rem;
-    height: 17rem;
-    position: relative;
+﻿/* ========================================
+   Counter 計數器頁面樣式
+   ======================================== */
+
+.counter-container {
+    padding: var(--tm-spacing-lg) var(--tm-spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-    .counter-block .counter-content {
-        display: flex;
+.counter-header {
+    margin-bottom: var(--tm-spacing-xl);
+    text-align: center;
+}
+
+.counter-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--tm-spacing-md);
+}
+
+/* 計數顯示區 */
+.counter-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--tm-spacing-xl) 0;
+}
+
+.counter-number {
+    font-size: 120px;
+    font-weight: var(--tm-font-weight-bold);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--tm-primary) 0%, var(--tm-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.counter-actions {
+    display: flex;
+    gap: var(--tm-spacing-sm);
+    justify-content: center;
+    padding: var(--tm-spacing-sm) 0;
+}
+
+/* 統計區 */
+.counter-stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-md);
+    padding: var(--tm-spacing-sm) 0;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-xs);
+    padding: var(--tm-spacing-sm);
+    background-color: var(--tm-bg-light);
+    border-radius: var(--tm-radius-sm);
+    align-items: center;
+}
+
+.stat-item span:first-child {
+    color: var(--tm-primary);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .counter-content {
+        grid-template-columns: 1fr;
+    }
+
+    .counter-number {
+        font-size: 80px;
+    }
+
+    .counter-actions {
         flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
+        width: 100%;
     }
-
-    .counter-block .counter-count {
-        font-size: 7.5rem;
-        font-weight: 400;
-        line-height: 7.75rem;
-    }
-
-    .counter-block .counter-block-back {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--bs-body-color, var(--DS-color-content-neutral-default-rest));
-        opacity: 0.05;
-        border-radius: 1rem;
-        z-index: -2;
-    }
+}

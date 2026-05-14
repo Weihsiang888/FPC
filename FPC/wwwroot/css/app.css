@@ -1,0 +1,203 @@
+/* ========================================
+   Techman Robot 品牌設計系統
+   Design Tokens & Global Styles
+   ======================================== */
+
+/* 1. 色彩系統 (Color System) */
+:root {
+    /* 品牌主色 - 科技藍 */
+    --tm-primary: #1D7A99;
+    --tm-primary-hover: #1A6D89;
+
+    /* 品牌輔色 - 智慧綠 */
+    --tm-secondary: #89D926;
+    --tm-secondary-hover: #7EC823;
+
+    /* 狀態與背景 */
+    --tm-error: #D01717;
+    --tm-bg-light: #FAFAFA;
+    --tm-bg-dark: #2A2A2A;
+    --tm-bg-card-dark: #252626;
+
+    /* 文字 */
+    --tm-text-main: #252424;      /* 深灰色，非全黑 */
+    --tm-text-secondary: #313233;
+    --tm-text-light: #D0D0CE;     /* 深色背景下使用 */
+
+    /* 框線 */
+    --tm-border-light: #EDEDED;
+    --tm-border-main: #878A8C;
+
+    /* 陰影 */
+    --tm-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --tm-shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    /* 2. 字型排版 (Typography) */
+    --tm-font-family: 'Montserrat', 'Noto Sans CJK TC', sans-serif;
+
+    /* 字級大小 */
+    --tm-font-size-h1: 48px;
+    --tm-font-size-h2: 40px;
+    --tm-font-size-h3: 32px;
+    --tm-font-size-h4: 24px;
+    --tm-font-size-h5: 20px;
+    --tm-font-size-body: 16px;
+    --tm-font-size-subtitle: 14px;
+    --tm-font-size-caption: 12px;
+
+    /* 行高 */
+    --tm-line-height-heading: 1.2;
+    --tm-line-height-body: 1.5;
+
+    /* 字重 */
+    --tm-font-weight-regular: 400;
+    --tm-font-weight-medium: 500;
+    --tm-font-weight-semibold: 600;
+    --tm-font-weight-bold: 700;
+
+    /* 3. 間距規範 (Spacing - 4px Base) */
+    --tm-spacing-xs: 8px;
+    --tm-spacing-sm: 16px;
+    --tm-spacing-md: 24px;
+    --tm-spacing-lg: 40px;
+    --tm-spacing-xl: 60px;
+    --tm-spacing-xxl: 80px;
+    --tm-spacing-hero: 120px;
+
+    /* 4. 圓角 (Border Radius) */
+    --tm-radius-sm: 4px;
+    --tm-radius-md: 8px;
+    --tm-radius-lg: 12px;
+
+    /* 5. 組件高度 (Component Heights) */
+    --tm-button-height-default: 40px;
+    --tm-button-height-large: 52px;
+    --tm-input-height: 40px;
+}
+
+/* ========================================
+   全域基礎樣式 (Global Base Styles)
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: var(--tm-font-family);
+    font-size: var(--tm-font-size-body);
+    line-height: var(--tm-line-height-body);
+    color: var(--tm-text-main);
+    background-color: var(--tm-bg-light);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* 字型排版樣式 */
+h1, .tm-h1 {
+    font-size: var(--tm-font-size-h1);
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
+h2, .tm-h2 {
+    font-size: var(--tm-font-size-h2);
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
+h3, .tm-h3 {
+    font-size: var(--tm-font-size-h3);
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
+h4, .tm-h4 {
+    font-size: var(--tm-font-size-h4);
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
+h5, .tm-h5 {
+    font-size: var(--tm-font-size-h5);
+    line-height: var(--tm-line-height-heading);
+    font-weight: var(--tm-font-weight-semibold);
+    margin: 0;
+}
+
+p, .tm-body {
+    font-size: var(--tm-font-size-body);
+    line-height: var(--tm-line-height-body);
+    font-weight: var(--tm-font-weight-regular);
+    margin: 0;
+}
+
+.tm-subtitle {
+    font-size: var(--tm-font-size-subtitle);
+    font-weight: var(--tm-font-weight-medium);
+    line-height: var(--tm-line-height-body);
+}
+
+.tm-caption {
+    font-size: var(--tm-font-size-caption);
+    font-weight: var(--tm-font-weight-regular);
+    line-height: var(--tm-line-height-body);
+}
+
+/* ========================================
+   背景裝飾 (Atmosphere Effects)
+   ======================================== */
+
+.tm-slice {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tm-slice-blue {
+    background-color: rgba(29, 122, 153, 0.15);
+}
+
+.tm-slice-green {
+    background-color: rgba(137, 217, 38, 0.12);
+}
+
+/* ========================================
+   通用樣式類別 (Utility Classes)
+   ======================================== */
+
+.tm-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--tm-spacing-sm);
+}
+
+.tm-section {
+    padding: var(--tm-spacing-xl) 0;
+}
+
+.tm-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================================
+   響應式斷點 (Responsive Breakpoints)
+   ======================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --tm-font-size-h1: 36px;
+        --tm-font-size-h2: 32px;
+        --tm-font-size-h3: 28px;
+        --tm-spacing-hero: 60px;
+    }
+}

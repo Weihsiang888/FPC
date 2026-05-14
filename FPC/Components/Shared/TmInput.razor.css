@@ -1,0 +1,113 @@
+/* ========================================
+   TmInput - Techman Robot 輸入框組件樣式
+   ======================================== */
+
+.tm-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-xs);
+    width: 100%;
+}
+
+.tm-input-label {
+    color: var(--tm-text-main);
+    font-weight: var(--tm-font-weight-medium);
+}
+
+.tm-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: var(--tm-input-height);
+    background-color: white;
+    border: 1px solid var(--tm-border-light);
+    border-radius: var(--tm-radius-sm);
+    transition: all 0.2s ease;
+}
+
+.tm-input-container:focus-within {
+    border-color: var(--tm-primary);
+    box-shadow: 0 0 0 3px rgba(29, 122, 153, 0.1);
+}
+
+.tm-input-container:hover:not(.tm-input-error) {
+    border-color: var(--tm-border-main);
+}
+
+/* 錯誤狀態 */
+.tm-input-error {
+    border-color: var(--tm-error) !important;
+}
+
+.tm-input-error:focus-within {
+    box-shadow: 0 0 0 3px rgba(208, 23, 23, 0.1);
+}
+
+/* 輸入框本體 */
+.tm-input-field {
+    flex: 1;
+    height: 100%;
+    padding: 0 var(--tm-spacing-sm);
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--tm-font-family);
+    font-size: var(--tm-font-size-body);
+    color: var(--tm-text-main);
+}
+
+.tm-input-field::placeholder {
+    color: var(--tm-border-main);
+    opacity: 0.6;
+}
+
+.tm-input-field:disabled {
+    background-color: var(--tm-bg-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Icon 樣式 */
+.tm-input-prefix-icon,
+.tm-input-suffix-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--tm-border-main);
+}
+
+.tm-input-prefix-icon {
+    margin-left: var(--tm-spacing-sm);
+    margin-right: 4px;
+}
+
+.tm-input-suffix-icon {
+    margin-right: var(--tm-spacing-sm);
+    margin-left: 4px;
+}
+
+/* 有前綴 Icon 時調整 padding */
+.tm-input-container:has(.tm-input-prefix-icon) .tm-input-field {
+    padding-left: 4px;
+}
+
+/* 有後綴 Icon 時調整 padding */
+.tm-input-container:has(.tm-input-suffix-icon) .tm-input-field {
+    padding-right: 4px;
+}
+
+/* 錯誤訊息 */
+.tm-input-error-message {
+    color: var(--tm-error);
+    font-size: var(--tm-font-size-caption);
+    margin-top: 4px;
+}
+
+/* 輔助文字 */
+.tm-input-helper-text {
+    color: var(--tm-text-secondary);
+    font-size: var(--tm-font-size-caption);
+    margin-top: 4px;
+}

@@ -1,0 +1,85 @@
+/* ========================================
+   Weather 天氣頁面樣式
+   ======================================== */
+
+.weather-container {
+    padding: var(--tm-spacing-lg) var(--tm-spacing-md);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.weather-header {
+    margin-bottom: var(--tm-spacing-xl);
+    text-align: center;
+}
+
+/* 載入狀態 */
+.weather-loading {
+    padding: var(--tm-spacing-xl);
+    text-align: center;
+}
+
+/* 天氣卡片網格 */
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--tm-spacing-sm);
+    margin-bottom: var(--tm-spacing-xl);
+}
+
+.weather-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-sm);
+    align-items: center;
+    text-align: center;
+    padding: var(--tm-spacing-sm) 0;
+}
+
+.weather-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.weather-temp {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: var(--tm-spacing-xs) 0;
+}
+
+.temp-celsius {
+    color: var(--tm-primary);
+    font-weight: var(--tm-font-weight-bold);
+}
+
+.temp-fahrenheit {
+    font-size: var(--tm-font-size-caption);
+}
+
+.weather-summary {
+    padding: var(--tm-spacing-xs) var(--tm-spacing-sm);
+    background-color: var(--tm-bg-light);
+    border-radius: var(--tm-radius-sm);
+}
+
+/* 表格區域 */
+.weather-table-section {
+    margin-top: var(--tm-spacing-xl);
+}
+
+.weather-table {
+    width: 100%;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .weather-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .temp-celsius {
+        font-size: var(--tm-font-size-h3);
+    }
+}

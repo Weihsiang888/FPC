@@ -1,0 +1,141 @@
+/* ========================================
+   TmCard - Techman Robot 卡片組件樣式
+   ======================================== */
+
+.tm-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid var(--tm-border-light);
+    border-radius: var(--tm-radius-md);
+    box-shadow: var(--tm-shadow-light);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+.tm-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--tm-spacing-sm);
+    padding: var(--tm-spacing-md);
+    border-bottom: 1px solid var(--tm-border-light);
+}
+
+.tm-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--tm-primary);
+}
+
+.tm-card-title {
+    flex: 1;
+    margin: 0;
+    color: var(--tm-text-main);
+    font-weight: var(--tm-font-weight-semibold);
+}
+
+.tm-card-header-extra {
+    margin-left: auto;
+}
+
+/* Body */
+.tm-card-body {
+    padding: var(--tm-spacing-md);
+    flex: 1;
+}
+
+.tm-card-description {
+    color: var(--tm-text-secondary);
+    margin-bottom: var(--tm-spacing-sm);
+    line-height: var(--tm-line-height-body);
+}
+
+/* Footer */
+.tm-card-footer {
+    padding: var(--tm-spacing-md);
+    border-top: 1px solid var(--tm-border-light);
+    background-color: var(--tm-bg-light);
+}
+
+/* 無 Header 時的 Body */
+.tm-card:not(:has(.tm-card-header)) .tm-card-body {
+    padding-top: var(--tm-spacing-md);
+}
+
+/* 無 Footer 時的 Body */
+.tm-card:not(:has(.tm-card-footer)) .tm-card-body {
+    padding-bottom: var(--tm-spacing-md);
+}
+
+/* ========================================
+   卡片變體樣式
+   ======================================== */
+
+/* Hover 變體 - 可懸停互動 */
+.tm-card-hover {
+    cursor: pointer;
+}
+
+.tm-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--tm-shadow-medium);
+    border-color: var(--tm-primary);
+}
+
+.tm-card-hover:active {
+    transform: translateY(-2px);
+}
+
+/* Dark 變體 - 深色背景 */
+.tm-card-dark {
+    background-color: var(--tm-bg-card-dark);
+    border-color: transparent;
+}
+
+.tm-card-dark .tm-card-title {
+    color: var(--tm-text-light);
+}
+
+.tm-card-dark .tm-card-description,
+.tm-card-dark .tm-card-body {
+    color: var(--tm-text-light);
+}
+
+.tm-card-dark .tm-card-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.tm-card-dark .tm-card-footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   特殊佈局
+   ======================================== */
+
+/* 水平排列的卡片 */
+.tm-card.tm-card-horizontal {
+    flex-direction: row;
+}
+
+.tm-card-horizontal .tm-card-body {
+    flex: 1;
+}
+
+/* 簡潔卡片 - 無框線 */
+.tm-card.tm-card-borderless {
+    border: none;
+    box-shadow: none;
+}
+
+/* 緊湊卡片 - 減少內距 */
+.tm-card.tm-card-compact .tm-card-header,
+.tm-card.tm-card-compact .tm-card-body,
+.tm-card.tm-card-compact .tm-card-footer {
+    padding: var(--tm-spacing-sm);
+}

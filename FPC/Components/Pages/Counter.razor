@@ -1,27 +1,78 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
-<PageTitle>Counter</PageTitle>
+<PageTitle>計數器 - Techman Robot</PageTitle>
 
-<h1>Counter</h1>
-
-<div class="counter-block">
-    <div class="counter-content">
-        <div class="counter-count">
-            @currentCount
-        </div>
-        <div class="counter-text">
-            current count
-        </div>
-        <div class="counter-block-back"></div>
+<div class="counter-container">
+    <div class="counter-header">
+        <h1 class="tm-h1">計數器</h1>
+        <p class="tm-body" style="color: var(--tm-text-secondary); margin-top: var(--tm-spacing-xs);">
+            即時數據計數與統計分析
+        </p>
     </div>
-    <DxButton Click="IncrementCount">Click me</DxButton>
+
+    <div class="counter-content">
+        <TmCard Title="當前計數" CardStyle="Default">
+            <ChildContent>
+                <div class="counter-display">
+                    <div class="counter-number">@currentCount</div>
+                    <p class="tm-subtitle" style="color: var(--tm-text-secondary); margin-top: var(--tm-spacing-sm);">
+                        次數統計
+                    </p>
+                </div>
+            </ChildContent>
+            <FooterContent>
+                <div class="counter-actions">
+                    <TmButton ButtonType="Primary" Size="Large" Text="增加計數" OnClick="IncrementCount" />
+                    <TmButton ButtonType="Secondary" Text="重置" OnClick="ResetCount" />
+                </div>
+            </FooterContent>
+        </TmCard>
+
+        <TmCard Title="計數統計" CardStyle="Default">
+            <div class="counter-stats">
+                <div class="stat-item">
+                    <span class="tm-h3">@currentCount</span>
+                    <span class="tm-subtitle" style="color: var(--tm-text-secondary);">總計數</span>
+                </div>
+                <div class="stat-item">
+                    <span class="tm-h3">@incrementsPerMinute.ToString("F1")</span>
+                    <span class="tm-subtitle" style="color: var(--tm-text-secondary);">每分鐘增量</span>
+                </div>
+                <div class="stat-item">
+                    <span class="tm-h3">@lastIncrementTime</span>
+                    <span class="tm-subtitle" style="color: var(--tm-text-secondary);">最後更新</span>
+                </div>
+            </div>
+        </TmCard>
+    </div>
 </div>
 
 @code {
     private int currentCount = 0;
+    private DateTime startTime = DateTime.Now;
+    private DateTime lastIncrement = DateTime.Now;
+    private double incrementsPerMinute = 0;
+    private string lastIncrementTime = "--:--:--";
 
     private void IncrementCount()
     {
         currentCount++;
+        lastIncrement = DateTime.Now;
+        lastIncrementTime = lastIncrement.ToString("HH:mm:ss");
+
+        var elapsedMinutes = (DateTime.Now - startTime).TotalMinutes;
+        if (elapsedMinutes > 0)
+        {
+            incrementsPerMinute = currentCount / elapsedMinutes;
+        }
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+        startTime = DateTime.Now;
+        lastIncrement = DateTime.Now;
+        incrementsPerMinute = 0;
+        lastIncrementTime = "--:--:--";
     }
 }

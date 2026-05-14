@@ -1,0 +1,98 @@
+/* ========================================
+   TmButton - Techman Robot 按鈕組件樣式
+   ======================================== */
+
+.tm-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 var(--tm-spacing-md);
+    height: var(--tm-button-height-default);
+    border: none;
+    border-radius: var(--tm-radius-sm);
+    font-family: var(--tm-font-family);
+    font-size: var(--tm-font-size-subtitle);
+    font-weight: var(--tm-font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.tm-button:focus {
+    outline: 2px solid var(--tm-primary);
+    outline-offset: 2px;
+}
+
+/* Primary 按鈕 - 藍底白字 */
+.tm-button-primary {
+    background-color: var(--tm-primary);
+    color: white;
+}
+
+.tm-button-primary:hover:not(:disabled) {
+    background-color: var(--tm-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(29, 122, 153, 0.3);
+}
+
+.tm-button-primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(29, 122, 153, 0.3);
+}
+
+/* Secondary 按鈕 - 白底藍框 */
+.tm-button-secondary {
+    background-color: white;
+    color: var(--tm-primary);
+    border: 2px solid var(--tm-primary);
+}
+
+.tm-button-secondary:hover:not(:disabled) {
+    background-color: var(--tm-primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(29, 122, 153, 0.2);
+}
+
+.tm-button-secondary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(29, 122, 153, 0.2);
+}
+
+/* Large 尺寸 */
+.tm-button-large {
+    height: var(--tm-button-height-large);
+    padding: 0 32px;
+    font-size: var(--tm-font-size-body);
+}
+
+/* Disabled 狀態 */
+.tm-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Icon 樣式 */
+.tm-button-icon {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+}
+
+.tm-button-text {
+    line-height: 1;
+}
+
+/* 只有 Icon 的按鈕 */
+.tm-button:has(.tm-button-icon):not(:has(.tm-button-text)) {
+    width: var(--tm-button-height-default);
+    padding: 0;
+}
+
+.tm-button-large:has(.tm-button-icon):not(:has(.tm-button-text)) {
+    width: var(--tm-button-height-large);
+}

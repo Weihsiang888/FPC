@@ -1,0 +1,137 @@
+@* Techman Robot 輸入框組件 *@
+
+<div class="tm-input-wrapper @CssClass">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label class="tm-input-label tm-subtitle">@Label</label>
+    }
+
+    <div class="tm-input-container @(HasError ? "tm-input-error" : "")">
+        @if (!string.IsNullOrEmpty(PrefixIcon))
+        {
+            <span class="tm-input-prefix-icon @PrefixIcon"></span>
+        }
+
+        <input class="tm-input-field"
+               type="@Type"
+               placeholder="@Placeholder"
+               value="@Value"
+               disabled="@Disabled"
+               @oninput="HandleInput"
+               @onfocus="HandleFocus"
+               @onblur="HandleBlur" />
+
+        @if (!string.IsNullOrEmpty(SuffixIcon))
+        {
+            <span class="tm-input-suffix-icon @SuffixIcon"></span>
+        }
+    </div>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <span class="tm-input-error-message tm-caption">@ErrorMessage</span>
+    }
+
+    @if (!string.IsNullOrEmpty(HelperText) && string.IsNullOrEmpty(ErrorMessage))
+    {
+        <span class="tm-input-helper-text tm-caption">@HelperText</span>
+    }
+</div>
+
+@code {
+    /// <summary>
+    /// 標籤文字
+    /// </summary>
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// 輸入框類型 (text/password/email/number等)
+    /// </summary>
+    [Parameter]
+    public string Type { get; set; } = "text";
+
+    /// <summary>
+    /// Placeholder 提示文字
+    /// </summary>
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    /// <summary>
+    /// 輸入值
+    /// </summary>
+    [Parameter]
+    public string? Value { get; set; }
+
+    /// <summary>
+    /// 值變更事件
+    /// </summary>
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    /// <summary>
+    /// 是否禁用
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    /// <summary>
+    /// 前綴 Icon CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? PrefixIcon { get; set; }
+
+    /// <summary>
+    /// 後綴 Icon CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? SuffixIcon { get; set; }
+
+    /// <summary>
+    /// 錯誤訊息
+    /// </summary>
+    [Parameter]
+    public string? ErrorMessage { get; set; }
+
+    /// <summary>
+    /// 輔助說明文字
+    /// </summary>
+    [Parameter]
+    public string? HelperText { get; set; }
+
+    /// <summary>
+    /// 自訂 CSS 類別
+    /// </summary>
+    [Parameter]
+    public string? CssClass { get; set; }
+
+    /// <summary>
+    /// Focus 事件
+    /// </summary>
+    [Parameter]
+    public EventCallback OnFocus { get; set; }
+
+    /// <summary>
+    /// Blur 事件
+    /// </summary>
+    [Parameter]
+    public EventCallback OnBlur { get; set; }
+
+    private bool HasError => !string.IsNullOrEmpty(ErrorMessage);
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        Value = e.Value?.ToString();
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    private async Task HandleFocus()
+    {
+        await OnFocus.InvokeAsync();
+    }
+
+    private async Task HandleBlur()
+    {
+        await OnBlur.InvokeAsync();
+    }
+}

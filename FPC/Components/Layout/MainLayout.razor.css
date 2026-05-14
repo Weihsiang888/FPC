@@ -1,83 +1,215 @@
-﻿.page {
-    height: 100%;
-    font-family: var(--bs-font-sans-serif, var(--DS-font-family-sans-serif));
-}
+﻿/* ========================================
+   Techman Robot MainLayout 樣式
+   ======================================== */
 
-::deep .content {
-    overflow: auto;
+/* 主佈局容器 */
+.tm-layout {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    position: relative;
 }
 
-::deep .icon-back {
-    --icon-mask-image: var(--icon-back-mask-image);
+/* ========================================
+   Header 導航列
+   ======================================== */
+
+.tm-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--tm-bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-::deep .icon-close {
-    --icon-mask-image: var(--icon-close-mask-image);
+.tm-header-scrolled {
+    /* 深色背景不需要 scrolled 狀態變化 */
 }
 
-::deep .icon-menu {
-    --icon-mask-image: var(--icon-menu-mask-image);
-}
-
-::deep .icon-log-in {
-    --icon-mask-image: var(--icon-log-in-mask-image);
-}
-
-::deep .icon-log-out {
-    --icon-mask-image: var(--icon-log-out-mask-image);
-}
-
-::deep .icon-user {
-    --icon-mask-image: var(--icon-user-mask-image);
-}
-
-::deep .docs-icon {
-    --icon-mask-image: var(--icon-docs-mask-image);
-}
-
-::deep .demos-icon {
-    --icon-mask-image: var(--icon-demos-mask-image);
-}
-
-::deep .footer-button:hover .demos-icon {
-    background-color: var(--dxbl-btn-hover-color);
-}
-
-::deep .footer-button:hover .docs-icon {
-    background-color: var(--dxbl-btn-hover-color);
-}
-
-::deep .menu-button:hover .icon {
-    background-color: var(--dxbl-btn-hover-color);
-}
-
-::deep .menu-button-nav:hover .icon {
-    background-color: var(--dxbl-btn-hover-color);
-}
-
-.panel-open .menu-button {
-    display: inline-flex;
-}
-
-.menu-button-nav {
-    background-image: url("images/close.svg");
-    width: 1.875rem;
-    height: 1.875rem;
-}
-
-.nav-buttons-container {
+.tm-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--tm-spacing-sm) var(--tm-spacing-md);
     display: flex;
-    gap: 10px;
-    padding: 2rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tm-spacing-md);
 }
 
-    .nav-buttons-container ::deep .menubutton-float-end {
-        margin-left: auto;
+.tm-header-logo img {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1); /* 白色化 Logo */
+}
+
+.tm-header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--tm-spacing-lg);
+    flex: 1;
+    justify-content: center;
+}
+
+.tm-nav-link {
+    text-decoration: none;
+    color: var(--tm-text-light);
+    transition: color 0.2s ease;
+    position: relative;
+    padding: 8px 0;
+}
+
+.tm-nav-link:hover {
+    color: var(--tm-secondary);
+}
+
+.tm-nav-link::deep .tm-subtitle {
+    font-weight: var(--tm-font-weight-medium);
+}
+
+.tm-nav-link.active {
+    color: var(--tm-secondary);
+}
+
+.tm-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--tm-secondary);
+}
+
+.tm-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--tm-spacing-sm);
+}
+
+/* Header 登入按鈕特殊樣式 (深色背景下使用) */
+::deep .tm-header-login-btn.tm-button-secondary {
+    background-color: transparent;
+    color: var(--tm-secondary);
+    border-color: var(--tm-secondary);
+}
+
+::deep .tm-header-login-btn.tm-button-secondary:hover {
+    background-color: var(--tm-secondary);
+    color: var(--tm-bg-dark);
+}
+
+/* ========================================
+   Main Content Area
+   ======================================== */
+
+.tm-main {
+    flex: 1;
+    margin-top: 72px; /* Header 高度 */
+    position: relative;
+    overflow: hidden;
+}
+
+.tm-content {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 72px - 300px); /* 扣除 header 和 footer */
+}
+
+/* ========================================
+   Footer 頁尾
+   ======================================== */
+
+.tm-footer {
+    background-color: var(--tm-bg-dark);
+    padding: var(--tm-spacing-xl) 0;
+    margin-top: auto;
+}
+
+.tm-footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--tm-spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--tm-spacing-xl);
+}
+
+.tm-footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-sm);
+    max-width: 400px;
+}
+
+.tm-footer-logo {
+    height: 48px;
+    width: auto;
+    margin-bottom: var(--tm-spacing-xs);
+    filter: brightness(0) invert(1); /* 白色化 Logo */
+}
+
+.tm-footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-xs);
+}
+
+.tm-footer-right {
+    display: flex;
+    gap: var(--tm-spacing-xl);
+}
+
+.tm-footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tm-spacing-xs);
+}
+
+.tm-footer-link {
+    color: var(--tm-text-light);
+    text-decoration: none;
+    font-size: var(--tm-font-size-subtitle);
+    transition: color 0.2s ease;
+    padding: 4px 0;
+}
+
+.tm-footer-link:hover {
+    color: var(--tm-secondary);
+}
+
+/* ========================================
+   響應式設計
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .tm-header-nav {
+        gap: var(--tm-spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .tm-header-container {
+        flex-wrap: wrap;
     }
 
-    .nav-buttons-container ::deep .dxbl-btn-icon-only {
-        --dxbl-btn-padding-x: 0.75rem;
-        --dxbl-btn-padding-y: 0.25rem;
+    .tm-header-nav {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        padding-top: var(--tm-spacing-sm);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
+
+    .tm-footer-container {
+        flex-direction: column;
+        gap: var(--tm-spacing-md);
+    }
+
+    .tm-footer-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
